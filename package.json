@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack-dev-server",
-    "prod": "webpack -p",
+    "prod": "npm run clean && webpack -p",
     "clean": "rimraf ./dist/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
