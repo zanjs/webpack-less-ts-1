@@ -14,6 +14,7 @@ module.exports = {
     filename: '[name].bundle.js'
   },
   plugins: [
+    
     new ExtractTextPlugin({
       filename: (getPath) => {
         return getPath('css/[name].[chunkhash].css').replace('css/js', 'css');
@@ -28,7 +29,7 @@ module.exports = {
       excludeChunks: ['contact'], //新增
       hash: true,
       filename: './index.html',
-      template: './src/index.html', // Load a custom template (ejs by default see the FAQ for details)
+      template: './src/index.pug', // Load a custom template (ejs by default see the FAQ for details)
     }),
     new HtmlWebpackPlugin({
       title: 'contact',
@@ -36,13 +37,15 @@ module.exports = {
       filename: 'contact.html',
       chunks: ['contact'], //新增
       template: './src/contact.html'
-    })
-
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9090,
+    hot: true,
     stats: 'errors-only',
     open: true // 启动后自动打开浏览器窗口
   },
@@ -54,18 +57,30 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader']
-        })
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
-      }
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.pug$/,
+        use: ['html-loader', 'pug-html-loader']
+      },
+      // {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: ['css-loader']
+      //   })
+      // },
+      // {
+      //   test: /\.scss$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: ['css-loader', 'sass-loader']
+      //   })
+      // }
     ],
     // rules: [
     //   {test: /\.css$/, use: ['style-loader', 'css-loader']},
