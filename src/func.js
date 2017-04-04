@@ -1,7 +1,12 @@
+'use strict';
+
 const A = 1
 
-const util = function () {
-    return 1 + 1
+class Util {
+   
+    aa() {
+        return A + 1
+    }
 }
 
-export default util
+export default Util

@@ -6,8 +6,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: {
-    app:'./src/app.js',
-    contact:'./src/contact.js'
+    app: './src/app.js',
+    contact: './src/contact.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -22,11 +22,20 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'myApp',
-      minify: {
-        collapseWhitespace: true //生成被压缩的html文件
-      },
+      // minify: {
+      //   collapseWhitespace: true //生成被压缩的html文件
+      // },
+      excludeChunks: ['contact'], //新增
       hash: true,
-      template: './index.html', // Load a custom template (ejs by default see the FAQ for details)
+      filename: './index.html',
+      template: './src/index.html', // Load a custom template (ejs by default see the FAQ for details)
+    }),
+    new HtmlWebpackPlugin({
+      title: 'contact',
+      hash: true,
+      filename: 'contact.html',
+      chunks: ['contact'], //新增
+      template: './src/contact.html'
     })
 
   ],

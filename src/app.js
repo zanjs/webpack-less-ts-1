@@ -6,8 +6,8 @@ import './main.scss'
 
 let app = new func()
 
-// console.log(func.A)
-console.log(app)
+console.log(func)
+console.log(app.aa())
 
 
 
