@@ -1,8 +1,9 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var path = require('path')
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+var path = require('path')
 
+var webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -66,7 +67,7 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['html-loader', 'pug-html-loader']
-      },
+      }
       // {
       //   test: /\.css$/,
       //   use: ExtractTextPlugin.extract({
